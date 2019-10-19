@@ -17,7 +17,7 @@ when the program execution reaches to the following point,
 
 **if ne is true, then the program will execute +197,201,204,207,209**
 
-**otherwise it will do +179,182,187,192,195,209**
+**otherwise it will do +179,182,187,192,195,209, which will print out "You're winner!"**
 
 ```assembly
  0x080486f3 <+177>:   jne    0x8048707 <do_magic+197>
