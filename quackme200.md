@@ -1,7 +1,7 @@
 ## picoCTF 2018
 ### quackme - Points: 200
 
->Can you deal with the Duck Web? Get us the flag from this program. You can also find the program in /problems/quackme_2_45804bbb593f90c3b4cefabe60c1c4e2.
+>Can you deal with the Duck Web? Get us the flag from [this](https://2018shell.picoctf.com/static/197682216dbdd2c67ae043dc531d4cfc/main) program. You can also find the program in /problems/quackme_2_45804bbb593f90c3b4cefabe60c1c4e2.
 
 The way to solve this challenge is inspired by this [blog](https://ctf-wiki.github.io/ctf-tools/binary_core_tools/instrumentation/intel_pin/).
 
