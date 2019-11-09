@@ -72,7 +72,7 @@ To achieve that, we just do,
   /bin/dash: 0: can't access tty; job control turned off
   $ 
   ```
-  now type `whoami` in this window, we will see `www-data`. That's the default user under which the Apache service is running under Ubuntu. We get a shell from the web server!
+Now type `whoami` in this window, we will see `www-data`. That's the default user under which the Apache service is running under Ubuntu. We get a shell from the web server!
 
 The door is opened, the rest is left to your imagination.
 
