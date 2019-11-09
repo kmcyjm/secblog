@@ -41,6 +41,7 @@ A few points to note,
   That is, when the `Go!` button is clicked, the `check()` function will be calling `.submit()` right away to submit the form, without doing any validation against the input.
 
 - After the data is posted to the server, there is a second check being performed.
+
 `preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/',$ip)`
   This check looks more promising, it does a decent job validating the IP address, which doesn't seem to expose any holes for exploitation.
   However, if we look more colsely, the regex doesn't end with a anchor `$`. That means as long as the data begins with a valid IP address, the data will be considered valid. This is where makes it vulnerable.
