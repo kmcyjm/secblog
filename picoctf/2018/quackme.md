@@ -3,7 +3,7 @@
 
 >Can you deal with the Duck Web? Get us the flag from [this](https://2018shell.picoctf.com/static/197682216dbdd2c67ae043dc531d4cfc/main) program. You can also find the program in /problems/quackme_2_45804bbb593f90c3b4cefabe60c1c4e2.
 
-The way to solve this challenge is inspired by this [blog](https://ctf-wiki.github.io/ctf-tools/binary_core_tools/instrumentation/intel_pin/).
+The way to solve this challenge is inspired by this [blog](https://ctf-wiki.github.io/ctf-tools/binary-core-tools/instrumentation/intel_pin/).
 
 Basically it uses a tool called [pin](https://software.intel.com/en-us/articles/pin-a-dynamic-binary-instrumentation-tool) from Intel which has various plugins (.so), one of which can show the instructions executed given an input to a program.
 
@@ -48,6 +48,9 @@ flag = ""
 output = ""
 
 pinPath = "/home/ubuntu/intel-pin-ctf/pin-3.11-97998-g7ecce2dac-gcc-linux/pin"
+# Note that if you want to send data to the process’s stdin, you need to create the Popen object with stdin=PIPE.
+# Similarly, to get anything other than None in the result tuple, you need to give stdout=PIPE and/or stderr=PIPE too.
+# https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
 pinInit = lambda tool, elf: Popen([pinPath, '-t', tool, '--', elf], stdin = PIPE, stdout = PIPE)
 pinWrite = lambda cont: pin.stdin.write(cont)
 pinRead = lambda : pin.communicate()[0]
