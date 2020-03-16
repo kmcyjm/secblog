@@ -34,7 +34,15 @@ when the program execution reaches to the following point,
  0x08048714 <+210>:   ret
 ```
 
-Based upon this observation, we can use the following code to solve this challenge.
+Based upon this observation, we can use the following Python code to solve this challenge.
+
+Before running this code, we need to generate the `inscount0.so` file.
+
+Download it from the link above, navigate to `pin-3.11-97998-g7ecce2dac-gcc-linux/source/tools/ManualExamples` folder, and execute the following command,
+
+`$ make obj-ia32/inscount0.so TARGET=ia32`
+
+This file will be available under `obj-ia32` in the current directory.
 
 ```python
 #!/usr/bin/env python3
