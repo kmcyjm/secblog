@@ -53,6 +53,9 @@ pinPath = "/home/ubuntu/intel-pin-ctf/pin-3.11-97998-g7ecce2dac-gcc-linux/pin"
 # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
 pinInit = lambda tool, elf: Popen([pinPath, '-t', tool, '--', elf], stdin = PIPE, stdout = PIPE)
 pinWrite = lambda cont: pin.stdin.write(cont)
+
+# communicate() returns a tuple (stdout_data, stderr_data). 
+# The data will be strings if streams were opened in text mode; otherwise, bytes.
 pinRead = lambda : pin.communicate()[0]
 
 print("Start time: ", datetime.datetime.now())
