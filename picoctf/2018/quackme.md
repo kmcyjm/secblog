@@ -48,25 +48,25 @@ This file will be available under `obj-ia32` in the current directory.
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import datetime
+import time
 from subprocess import Popen, PIPE
 
 max_counter = []
 flag = ""
 output = ""
 
-pinPath = "/home/ubuntu/intel-pin-ctf/pin-3.11-97998-g7ecce2dac-gcc-linux/pin"
+pinPath = "/home/jyi/Downloads/pin-3.11-97998-g7ecce2dac-gcc-linux/pin"
 # Note that if you want to send data to the process’s stdin, you need to create the Popen object with stdin=PIPE.
 # Similarly, to get anything other than None in the result tuple, you need to give stdout=PIPE and/or stderr=PIPE too.
 # https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate
 pinInit = lambda tool, elf: Popen([pinPath, '-t', tool, '--', elf], stdin = PIPE, stdout = PIPE)
 pinWrite = lambda cont: pin.stdin.write(cont)
 
-# communicate() returns a tuple (stdout_data, stderr_data). 
+# communicate() returns a tuple (stdout_data, stderr_data).
 # The data will be strings if streams were opened in text mode; otherwise, bytes.
 pinRead = lambda : pin.communicate()[0]
 
-print("Start time: ", datetime.datetime.now())
+start_time = time.time()
 
 # stop when the "You are winner!" message is printed in the output
 while ("You are winner!" not in output):
@@ -85,7 +85,7 @@ while ("You are winner!" not in output):
             line = f.readline()
 
         counter = line.split()[1]
-        print("Testing ", ascii_char, ", The corresponding counter is: ", counter)
+        print(f"Testing {flag}{ascii_char} the corresponding counter is: {counter}")
 
         if len(max_counter) == 0:
             max_counter.append(counter)
@@ -101,5 +101,6 @@ while ("You are winner!" not in output):
     print("#" * 10 + "\n" + "Flag is now: " + flag + "\n" + "#" * 10)
 
 print("Flag found! " + flag)
-print("End time: ", datetime.datetime.now())
+duration = time.time() - start_time
+print(f"Duration {duration} seconds")
 ```
